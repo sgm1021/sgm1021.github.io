@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>KangWon`s blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="KangWon`s blog"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="KangWon`s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Pandas Pivot 데이터 프레임의 컬럼 데이터에서 index, column, value를 선택해서 데이터 프레임을 만드는 방법 df.pivot(index, columns, values) groupby 하고 pivot을 실행   df.pivot_table(values, index, columns, aggfunc)  pandas io 데이터 프레임을 저장"><meta property="og:type" content="blog"><meta property="og:title" content="KangWon`s blog"><meta property="og:url" content="https://sgm1021.github.io/2021/03/05/05_pandas_3/"><meta property="og:site_name" content="KangWon`s blog"><meta property="og:description" content="Pandas Pivot 데이터 프레임의 컬럼 데이터에서 index, column, value를 선택해서 데이터 프레임을 만드는 방법 df.pivot(index, columns, values) groupby 하고 pivot을 실행   df.pivot_table(values, index, columns, aggfunc)  pandas io 데이터 프레임을 저장"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://sgm1021.github.io/img/og_image.png"><meta property="article:published_time" content="2021-03-05T03:10:02.525Z"><meta property="article:modified_time" content="2021-03-05T03:10:02.525Z"><meta property="article:author" content="KangWon Seo"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sgm1021.github.io/2021/03/05/05_pandas_3/"},"headline":"KangWon`s blog","image":["https://sgm1021.github.io/img/og_image.png"],"datePublished":"2021-03-05T03:10:02.525Z","dateModified":"2021-03-05T03:10:02.525Z","author":{"@type":"Person","name":"KangWon Seo"},"description":"Pandas Pivot 데이터 프레임의 컬럼 데이터에서 index, column, value를 선택해서 데이터 프레임을 만드는 방법 df.pivot(index, columns, values) groupby 하고 pivot을 실행   df.pivot_table(values, index, columns, aggfunc)  pandas io 데이터 프레임을 저장"}</script><link rel="canonical" href="https://sgm1021.github.io/2021/03/05/05_pandas_3/"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo3.png" alt="KangWon`s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" target="_blank" rel="noopener" href="https://about.me/kangwon">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-03-05T03:10:02.525Z" title="2021. 3. 5. 오후 12:10:02">2021-03-05</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-03-05T03:10:02.525Z" title="2021. 3. 5. 오후 12:10:02">2021-03-05</time></span><span class="level-item">4 minutes read (About 665 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"> </h1><div class="content"><h3 id="Pandas-Pivot"><a href="#Pandas-Pivot" class="headerlink" title="Pandas Pivot"></a>Pandas Pivot</h3><ul>
+<li>데이터 프레임의 컬럼 데이터에서 index, column, value를 선택해서 데이터 프레임을 만드는 방법</li>
+<li><code>df.pivot(index, columns, values)</code><ul>
+<li>groupby 하고 pivot을 실행</li>
+</ul>
+</li>
+<li><code>df.pivot_table(values, index, columns, aggfunc)</code></li>
+</ul>
+<h4 id="pandas-io"><a href="#pandas-io" class="headerlink" title="pandas io"></a>pandas io</h4><ul>
+<li>데이터 프레임을 저장, 로드</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># lod</span></span><br><span class="line">titanic = pd.read_csv(<span class="string">&quot;datas/train.csv&quot;</span>)</span><br><span class="line">titanic.tail(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>889</th>
+      <td>890</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Behr, Mr. Karl Howell</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.00</td>
+      <td>C148</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>891</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Dooley, Mr. Patrick</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.75</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># save</span></span><br><span class="line">titanic.to_csv(<span class="string">&quot;datas/titanic.tsv&quot;</span>, sep=<span class="string">&quot;\t&quot;</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># load : encoding</span></span><br><span class="line">df = pd.read_csv(<span class="string">&quot;datas/2014_p.csv&quot;</span>, encoding=<span class="string">&quot;euc_kr&quot;</span>)</span><br><span class="line">df.tail(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>RCTRCK</th>
+      <th>RACE_DE</th>
+      <th>RACE_NO</th>
+      <th>PARTCPT_NO</th>
+      <th>RANK</th>
+      <th>RCHOSE_NM</th>
+      <th>HRSMN</th>
+      <th>RCORD</th>
+      <th>ARVL_DFFRNC</th>
+      <th>EACH_SCTN_PASAGE_RANK</th>
+      <th>A_WIN_SYTM_EXPECT_ALOT</th>
+      <th>WIN_STA_EXPECT_ALOT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>27216</th>
+      <td>27217</td>
+      <td>제주</td>
+      <td>2014-11-29</td>
+      <td>9</td>
+      <td>7</td>
+      <td>6.0</td>
+      <td>미주여행</td>
+      <td>김경휴</td>
+      <td>0:01:31.1</td>
+      <td>13</td>
+      <td>2 -  -  - 2 - 3 - 6</td>
+      <td>6.2</td>
+      <td>9.4</td>
+    </tr>
+    <tr>
+      <th>27217</th>
+      <td>27218</td>
+      <td>제주</td>
+      <td>2014-11-29</td>
+      <td>9</td>
+      <td>6</td>
+      <td>1.0</td>
+      <td>철옹성</td>
+      <td>장우성</td>
+      <td>0:01:26.6</td>
+      <td>NaN</td>
+      <td>1 -  -  - 1 - 1 - 1</td>
+      <td>3.9</td>
+      <td>2.9</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h4 id="kaggle"><a href="#kaggle" class="headerlink" title="kaggle"></a>kaggle</h4><ul>
+<li>데이터 분석, 모델을 경쟁할 수 있도록 만든 서비스</li>
+<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/">https://www.kaggle.com/</a></li>
+</ul>
+<h4 id="1-성별-좌석등급에-따른-데이터의-수"><a href="#1-성별-좌석등급에-따른-데이터의-수" class="headerlink" title="1. 성별, 좌석등급에 따른 데이터의 수"></a>1. 성별, 좌석등급에 따른 데이터의 수</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df1 = titanic.groupby([<span class="string">&quot;Sex&quot;</span>, <span class="string">&quot;Pclass&quot;</span>]).size().reset_index(name=<span class="string">&quot;counts&quot;</span>)</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sex</th>
+      <th>Pclass</th>
+      <th>counts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>female</td>
+      <td>1</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>female</td>
+      <td>2</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>female</td>
+      <td>3</td>
+      <td>144</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>male</td>
+      <td>1</td>
+      <td>122</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>male</td>
+      <td>2</td>
+      <td>108</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>male</td>
+      <td>3</td>
+      <td>347</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pivot</span></span><br><span class="line">result = df1.pivot(<span class="string">&quot;Sex&quot;</span>, <span class="string">&quot;Pclass&quot;</span>, <span class="string">&quot;counts&quot;</span>)</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Pclass</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>94</td>
+      <td>76</td>
+      <td>144</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>122</td>
+      <td>108</td>
+      <td>347</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pivot table 이용</span></span><br><span class="line">titanic[<span class="string">&quot;counts&quot;</span>] = <span class="number">1</span></span><br><span class="line">titanic.tail(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+      <th>counts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>889</th>
+      <td>890</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Behr, Mr. Karl Howell</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.00</td>
+      <td>C148</td>
+      <td>C</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>891</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Dooley, Mr. Patrick</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.75</td>
+      <td>NaN</td>
+      <td>Q</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = titanic.pivot_table(<span class="string">&quot;counts&quot;</span>, [<span class="string">&quot;Pclass&quot;</span>], [<span class="string">&quot;Survived&quot;</span>], aggfunc=np.<span class="built_in">sum</span>)</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Survived</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>Pclass</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>80</td>
+      <td>136</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>97</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>372</td>
+      <td>119</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result[<span class="string">&quot;total&quot;</span>] = result[<span class="number">0</span>]+result[<span class="number">1</span>]</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Survived</th>
+      <th>0</th>
+      <th>1</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>Pclass</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>80</td>
+      <td>136</td>
+      <td>216</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>97</td>
+      <td>87</td>
+      <td>184</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>372</td>
+      <td>119</td>
+      <td>491</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result.loc[<span class="string">&quot;total&quot;</span>] = result.loc[<span class="number">1</span>] + result.loc[<span class="number">2</span>] + result.loc[<span class="number">3</span>]</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Survived</th>
+      <th>0</th>
+      <th>1</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <th>Pclass</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>80</td>
+      <td>136</td>
+      <td>216</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>97</td>
+      <td>87</td>
+      <td>184</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>372</td>
+      <td>119</td>
+      <td>491</td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td>549</td>
+      <td>342</td>
+      <td>891</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.read_csv(<span class="string">&quot;datas/2014_p.csv&quot;</span>, encoding=<span class="string">&quot;euc-kr&quot;</span>)</span><br><span class="line">df1.tail(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>RCTRCK</th>
+      <th>RACE_DE</th>
+      <th>RACE_NO</th>
+      <th>PARTCPT_NO</th>
+      <th>RANK</th>
+      <th>RCHOSE_NM</th>
+      <th>HRSMN</th>
+      <th>RCORD</th>
+      <th>ARVL_DFFRNC</th>
+      <th>EACH_SCTN_PASAGE_RANK</th>
+      <th>A_WIN_SYTM_EXPECT_ALOT</th>
+      <th>WIN_STA_EXPECT_ALOT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>27216</th>
+      <td>27217</td>
+      <td>제주</td>
+      <td>2014-11-29</td>
+      <td>9</td>
+      <td>7</td>
+      <td>6.0</td>
+      <td>미주여행</td>
+      <td>김경휴</td>
+      <td>0:01:31.1</td>
+      <td>13</td>
+      <td>2 -  -  - 2 - 3 - 6</td>
+      <td>6.2</td>
+      <td>9.4</td>
+    </tr>
+    <tr>
+      <th>27217</th>
+      <td>27218</td>
+      <td>제주</td>
+      <td>2014-11-29</td>
+      <td>9</td>
+      <td>6</td>
+      <td>1.0</td>
+      <td>철옹성</td>
+      <td>장우성</td>
+      <td>0:01:26.6</td>
+      <td>NaN</td>
+      <td>1 -  -  - 1 - 1 - 1</td>
+      <td>3.9</td>
+      <td>2.9</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2 = pd.read_csv(<span class="string">&quot;datas/2014_s.csv&quot;</span>, encoding=<span class="string">&quot;euc-kr&quot;</span>)</span><br><span class="line">df2.tail(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>RCTRCK</th>
+      <th>RACE_DE</th>
+      <th>PRDCTN_NATION_NM</th>
+      <th>SEX</th>
+      <th>AGE</th>
+      <th>BND_WT</th>
+      <th>TRNER</th>
+      <th>RCHOSE_OWNR_NM</th>
+      <th>RCHOSE_BDWGH</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>27216</th>
+      <td>27217</td>
+      <td>제주</td>
+      <td>2014-11-29</td>
+      <td>한</td>
+      <td>거</td>
+      <td>NaN</td>
+      <td>53.0</td>
+      <td>강대은</td>
+      <td>김기준</td>
+      <td>281</td>
+    </tr>
+    <tr>
+      <th>27217</th>
+      <td>27218</td>
+      <td>제주</td>
+      <td>2014-11-29</td>
+      <td>한</td>
+      <td>거</td>
+      <td>NaN</td>
+      <td>57.5</td>
+      <td>박병진</td>
+      <td>강상우</td>
+      <td>314</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></div><div class="article-licensing box"><div class="licensing-title"><p><a href="https://sgm1021.github.io/2021/03/05/05_pandas_3/">https://sgm1021.github.io/2021/03/05/05_pandas_3/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KangWon Seo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-03-05</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-03-05</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2021/03/05/hello-world/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Hello World</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/03/05/04_pandas_2/"><span class="level-item"> </span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/hodu.jpg" alt="KangWon Seo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">KangWon Seo</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Republic of Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">18</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">4</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/sgm1021"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/blog/"><span class="level-start"><span class="level-item">blog</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/book/"><span class="level-start"><span class="level-item">book</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/programming/"><span class="level-start"><span class="level-item">programming</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:21:44.000Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/%EC%A0%9C1%EA%B3%A0%EC%A7%80_%EB%AF%B8%EB%B6%84_%EC%9E%90%EB%8F%99%EA%B3%84%EC%82%B0/">제 1고지 미분 자동계산</a></p><p class="categories"><a href="/categories/book/">book</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.527Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/hello-world/">Hello World</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.525Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/05_pandas_3/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.523Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/04_pandas_2/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.522Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/03_pandas_1/"> </a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">March 2021</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">February 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AWS/"><span class="tag">AWS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/review/"><span class="tag">review</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo3.png" alt="KangWon`s blog" height="28"></a><p class="is-size-7"><span>&copy; 2021 KangWon Seo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

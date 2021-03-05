@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>KangWon`s blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="KangWon`s blog"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="KangWon`s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="summary numpy : 선형대수를 빠르게 현산해주는 패키지 행렬의 생성 1 : ndarray, np.array(iterable) 행렬의 생성 2 : ones, zeros 행렬 데이터 선택 : array[x, y, z] 행렬 데이터 수정 행렬 데이터를 선택 &amp;#x3D;, &amp;gt; (값(scala, vactor, matrix)) 브로드 캐스팅 개녕   arange"><meta property="og:type" content="blog"><meta property="og:title" content="KangWon`s blog"><meta property="og:url" content="https://sgm1021.github.io/2021/03/05/02_numpy_2/"><meta property="og:site_name" content="KangWon`s blog"><meta property="og:description" content="summary numpy : 선형대수를 빠르게 현산해주는 패키지 행렬의 생성 1 : ndarray, np.array(iterable) 행렬의 생성 2 : ones, zeros 행렬 데이터 선택 : array[x, y, z] 행렬 데이터 수정 행렬 데이터를 선택 &amp;#x3D;, &amp;gt; (값(scala, vactor, matrix)) 브로드 캐스팅 개녕   arange"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://sgm1021.github.io/img/og_image.png"><meta property="article:published_time" content="2021-03-05T03:10:02.521Z"><meta property="article:modified_time" content="2021-03-05T03:10:02.521Z"><meta property="article:author" content="KangWon Seo"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sgm1021.github.io/2021/03/05/02_numpy_2/"},"headline":"KangWon`s blog","image":["https://sgm1021.github.io/img/og_image.png"],"datePublished":"2021-03-05T03:10:02.521Z","dateModified":"2021-03-05T03:10:02.521Z","author":{"@type":"Person","name":"KangWon Seo"},"description":"summary numpy : 선형대수를 빠르게 현산해주는 패키지 행렬의 생성 1 : ndarray, np.array(iterable) 행렬의 생성 2 : ones, zeros 행렬 데이터 선택 : array[x, y, z] 행렬 데이터 수정 행렬 데이터를 선택 &#x3D;, &gt; (값(scala, vactor, matrix)) 브로드 캐스팅 개녕   arange"}</script><link rel="canonical" href="https://sgm1021.github.io/2021/03/05/02_numpy_2/"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo3.png" alt="KangWon`s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" target="_blank" rel="noopener" href="https://about.me/kangwon">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-03-05T03:10:02.521Z" title="2021. 3. 5. 오후 12:10:02">2021-03-05</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-03-05T03:10:02.521Z" title="2021. 3. 5. 오후 12:10:02">2021-03-05</time></span><span class="level-item">2 minutes read (About 336 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"> </h1><div class="content"><h3 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h3><ul>
+<li>numpy : 선형대수를 빠르게 현산해주는 패키지</li>
+<li>행렬의 생성 1 : ndarray, np.array(iterable)</li>
+<li>행렬의 생성 2 : ones, zeros</li>
+<li>행렬 데이터 선택 : array[x, y, z]</li>
+<li>행렬 데이터 수정<ul>
+<li>행렬 데이터를 선택</li>
+<li>=, &gt; (값(scala, vactor, matrix))</li>
+<li>브로드 캐스팅 개녕</li>
+</ul>
+</li>
+<li>arange : list에서 사용하는 range : 결과가 ndarray</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### quiz</span></span><br><span class="line">- <span class="number">1000</span> ~ <span class="number">130</span> 까지 랜덤한 숫자를 가지는 <span class="number">8</span>*<span class="number">8</span>행렬을 만들고,</span><br><span class="line">- <span class="number">3</span>의 배수는 fiz, <span class="number">5</span>의 배수는 buz, <span class="number">3</span>과 <span class="number">5</span>의 배수는 fbz 문자로 변환</span><br><span class="line">- 랜덤한 행렬 데이터</span><br></pre></td></tr></table></figure>
+<p>datas = np.random.randint(100, 130, size=(8, 8))</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 데이터 타입이 정수 -&gt; 문자열 : ndarray.astype()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">datas = np.random.randint(<span class="number">100</span>, <span class="number">130</span>, size=(<span class="number">8</span>, <span class="number">8</span>))</span><br><span class="line">datas</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[102, 102, 108, 128, 102, 114, 121, 111],
+       [125, 118, 112, 105, 110, 119, 111, 114],
+       [127, 109, 127, 101, 117, 113, 123, 109],
+       [110, 123, 128, 102, 124, 127, 103, 109],
+       [104, 106, 123, 115, 118, 117, 106, 110],
+       [104, 120, 109, 108, 120, 126, 109, 101],
+       [111, 107, 100, 118, 118, 118, 108, 104],
+       [118, 111, 102, 126, 126, 120, 108, 115]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data1 = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">data2 = [<span class="literal">True</span>, <span class="literal">False</span>, <span class="literal">True</span>]</span><br><span class="line">data1[data2]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([1, 3])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3의 배수 , 5의 배수, 15의 배수 위치값에 대한 T, F matrix 생성</span></span><br><span class="line">idx_3 = datas % <span class="number">3</span> == <span class="number">0</span></span><br><span class="line">idx_5 = datas % <span class="number">5</span> == <span class="number">0</span></span><br><span class="line">idx_15 = datas % <span class="number">15</span> == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터 타입을 str으로 변환</span></span><br><span class="line">datas.dtype</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>dtype(&#39;int32&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = datas.astype(<span class="string">&quot;str&quot;</span>)</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[&#39;113&#39;, &#39;123&#39;, &#39;107&#39;, &#39;126&#39;, &#39;102&#39;, &#39;116&#39;, &#39;109&#39;, &#39;102&#39;],
+       [&#39;103&#39;, &#39;106&#39;, &#39;103&#39;, &#39;129&#39;, &#39;109&#39;, &#39;109&#39;, &#39;115&#39;, &#39;104&#39;],
+       [&#39;125&#39;, &#39;120&#39;, &#39;103&#39;, &#39;114&#39;, &#39;102&#39;, &#39;103&#39;, &#39;129&#39;, &#39;102&#39;],
+       [&#39;114&#39;, &#39;107&#39;, &#39;120&#39;, &#39;107&#39;, &#39;118&#39;, &#39;103&#39;, &#39;110&#39;, &#39;121&#39;],
+       [&#39;101&#39;, &#39;113&#39;, &#39;114&#39;, &#39;124&#39;, &#39;101&#39;, &#39;126&#39;, &#39;115&#39;, &#39;109&#39;],
+       [&#39;125&#39;, &#39;121&#39;, &#39;101&#39;, &#39;116&#39;, &#39;124&#39;, &#39;121&#39;, &#39;108&#39;, &#39;108&#39;],
+       [&#39;129&#39;, &#39;119&#39;, &#39;119&#39;, &#39;129&#39;, &#39;108&#39;, &#39;122&#39;, &#39;114&#39;, &#39;108&#39;],
+       [&#39;101&#39;, &#39;103&#39;, &#39;126&#39;, &#39;120&#39;, &#39;127&#39;, &#39;109&#39;, &#39;127&#39;, &#39;105&#39;]],
+      dtype=&#39;&lt;U11&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># T, F matrix를 이용하여 특정 조건의 데이터를 선택 후 브로트캐스팅하게 값을 대입</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result[idx_3] = <span class="string">&quot;fiz&quot;</span></span><br><span class="line">result[idx_5] = <span class="string">&quot;buz&quot;</span></span><br><span class="line">result[idx_15] = <span class="string">&quot;fbz&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[&#39;113&#39;, &#39;fiz&#39;, &#39;107&#39;, &#39;fiz&#39;, &#39;fiz&#39;, &#39;116&#39;, &#39;109&#39;, &#39;fiz&#39;],
+       [&#39;103&#39;, &#39;106&#39;, &#39;103&#39;, &#39;fiz&#39;, &#39;109&#39;, &#39;109&#39;, &#39;buz&#39;, &#39;104&#39;],
+       [&#39;buz&#39;, &#39;fbz&#39;, &#39;103&#39;, &#39;fiz&#39;, &#39;fiz&#39;, &#39;103&#39;, &#39;fiz&#39;, &#39;fiz&#39;],
+       [&#39;fiz&#39;, &#39;107&#39;, &#39;fbz&#39;, &#39;107&#39;, &#39;118&#39;, &#39;103&#39;, &#39;buz&#39;, &#39;121&#39;],
+       [&#39;101&#39;, &#39;113&#39;, &#39;fiz&#39;, &#39;124&#39;, &#39;101&#39;, &#39;fiz&#39;, &#39;buz&#39;, &#39;109&#39;],
+       [&#39;buz&#39;, &#39;121&#39;, &#39;101&#39;, &#39;116&#39;, &#39;124&#39;, &#39;121&#39;, &#39;fiz&#39;, &#39;fiz&#39;],
+       [&#39;fiz&#39;, &#39;119&#39;, &#39;119&#39;, &#39;fiz&#39;, &#39;fiz&#39;, &#39;122&#39;, &#39;fiz&#39;, &#39;fiz&#39;],
+       [&#39;101&#39;, &#39;103&#39;, &#39;fiz&#39;, &#39;fbz&#39;, &#39;127&#39;, &#39;109&#39;, &#39;127&#39;, &#39;fbz&#39;]],
+      dtype=&#39;&lt;U11&#39;)
+</code></pre>
+<h3 id="Quiz"><a href="#Quiz" class="headerlink" title="Quiz"></a>Quiz</h3><ul>
+<li>1~20까지 랜덤한 숫자를 가지는 5*5 행렬 생성</li>
+<li>최대값에는 MAX, 최소값에는 MIN 문자열이 들어가도록 치환하는 코드<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.min(ndarray), np.max(ndarray)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">datas = np.random.randint(<span class="number">1</span>, <span class="number">20</span>, (<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line">datas</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[ 9,  6, 10, 19,  4],
+       [14,  8,  6,  6,  6],
+       [15, 14,  6, 17, 12],
+       [ 5,  9,  6, 13,  8],
+       [16,  3,  9, 10, 13]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min_num, max_num = np.<span class="built_in">min</span>(datas), np.<span class="built_in">max</span>(datas)</span><br><span class="line">min_num, max_num</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(3, 19)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idx_min = datas == min_num</span><br><span class="line">idx_max = datas == max_num</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx_min</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[False, False, False, False, False],
+       [False, False, False, False, False],
+       [False, False, False, False, False],
+       [False, False, False, False, False],
+       [False,  True, False, False, False]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx_max</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[False, False, False,  True, False],
+       [False, False, False, False, False],
+       [False, False, False, False, False],
+       [False, False, False, False, False],
+       [False, False, False, False, False]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = datas.astype(<span class="string">&quot;str&quot;</span>)</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[&#39;9&#39;, &#39;6&#39;, &#39;10&#39;, &#39;19&#39;, &#39;4&#39;],
+       [&#39;14&#39;, &#39;8&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;],
+       [&#39;15&#39;, &#39;14&#39;, &#39;6&#39;, &#39;17&#39;, &#39;12&#39;],
+       [&#39;5&#39;, &#39;9&#39;, &#39;6&#39;, &#39;13&#39;, &#39;8&#39;],
+       [&#39;16&#39;, &#39;3&#39;, &#39;9&#39;, &#39;10&#39;, &#39;13&#39;]], dtype=&#39;&lt;U11&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result[idx_min] = <span class="string">&quot;MIN&quot;</span></span><br><span class="line">result[idx_max] = <span class="string">&quot;MAX&quot;</span></span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[&#39;9&#39;, &#39;6&#39;, &#39;10&#39;, &#39;MAX&#39;, &#39;4&#39;],
+       [&#39;14&#39;, &#39;8&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;],
+       [&#39;15&#39;, &#39;14&#39;, &#39;6&#39;, &#39;17&#39;, &#39;12&#39;],
+       [&#39;5&#39;, &#39;9&#39;, &#39;6&#39;, &#39;13&#39;, &#39;8&#39;],
+       [&#39;16&#39;, &#39;MIN&#39;, &#39;9&#39;, &#39;10&#39;, &#39;13&#39;]], dtype=&#39;&lt;U11&#39;)
+</code></pre>
+<h3 id="1-linspace-logspace-함수"><a href="#1-linspace-logspace-함수" class="headerlink" title="1. linspace, logspace 함수"></a>1. linspace, logspace 함수</h3><ul>
+<li>linspace : 설정한 범위에서 선형적으로 분할한 위치의 값을 출력</li>
+<li>logspace : 설정한 범위에서 로그로 분할한 위치의 값을 축력</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># linspace</span></span><br><span class="line">np.linspace(<span class="number">0</span>, <span class="number">100</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([  0.,  25.,  50.,  75., 100.])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># logspace</span></span><br><span class="line"><span class="comment"># Log10(X1)=2, log10(X2)=3, log10(X3)=4</span></span><br><span class="line">np.logspace(<span class="number">2</span>, <span class="number">4</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([  100.,  1000., 10000.])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 30세 연봉이 $100000 이고 60세의 연봉이 $1000000 일때</span></span><br><span class="line"><span class="comment"># 연봉이 선형으로 증가, 지수함수로 증가하는 두 경우에서의 40, 50세 연봉을 출력</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">age_30 = <span class="number">100000</span></span><br><span class="line">age_60 = <span class="number">1000000</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.linspace(age_30, age_60, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([ 100000.,  400000.,  700000., 1000000.])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.logspace(np.log10(age_30), np.log10(age_60), <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([ 100000.        ,  215443.46900319,  464158.88336128,
+       1000000.        ])
+</code></pre>
+<h3 id="2-numpy-random"><a href="#2-numpy-random" class="headerlink" title="2. numpy random"></a>2. numpy random</h3><ul>
+<li>seed : 램덤값을 설정값</li>
+<li>rand : 균등분포로 랜덤한 값 생성</li>
+<li>randn : 정규분포로 난수를 발생</li>
+<li>randint : 균등분포로 정수값을 발생</li>
+<li>suffle : 행렬 데이터를 섞어 줍니다.</li>
+<li>choice : 특정 확률로 데이터를 선택</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># seed</span></span><br><span class="line">np.random.seed(<span class="number">1</span>)</span><br><span class="line">result1 = np.random.randint(<span class="number">10</span>, <span class="number">100</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">1</span>)</span><br><span class="line">result2 = np.random.randint(<span class="number">10</span>, <span class="number">100</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">2</span>)</span><br><span class="line">result3 = np.random.randint(<span class="number">10</span>, <span class="number">100</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">result1, result2, result3</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(array([47, 22, 82, 19, 85, 15, 89, 74, 26, 11]),
+ array([47, 22, 82, 19, 85, 15, 89, 74, 26, 11]),
+ array([50, 25, 82, 32, 53, 92, 85, 17, 44, 59]))
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.random.rand(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([0.20464863, 0.61927097, 0.29965467, 0.26682728, 0.62113383,
+       0.52914209, 0.13457995, 0.51357812, 0.18443987, 0.78533515])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># shuffle</span></span><br><span class="line">r = np.random.randint(<span class="number">1</span>, <span class="number">10</span>, (<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">r</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[2, 3, 5, 8],
+       [4, 5, 1, 2],
+       [1, 9, 6, 9]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.random.shuffle(r)</span><br><span class="line">r</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[1, 9, 6, 9],
+       [4, 5, 1, 2],
+       [2, 3, 5, 8]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#choice</span></span><br><span class="line">np.random.choice(<span class="number">5</span>, <span class="number">10</span>, p=[<span class="number">0.1</span>, <span class="number">0.4</span>, <span class="number">0.2</span>, <span class="number">0.3</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-10-e648bb30cd70&gt; in &lt;module&gt;
+      1 #choice
+----&gt; 2 np.random.choice(5, 10, p=[0.1, 0.4, 0.2, 0.3])
+
+
+mtrand.pyx in numpy.random.mtrand.RandomState.choice()
+
+
+ValueError: &#39;a&#39; and &#39;p&#39; must have same size
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># unique</span></span><br><span class="line">number, counts = np.unique(r, return_counts=<span class="literal">True</span>)</span><br><span class="line">print(number)</span><br><span class="line">print(counts)</span><br></pre></td></tr></table></figure>
+<pre><code>[1 2 3 4 5 6 8 9]
+[2 2 1 1 2 1 1 2]
+</code></pre>
+<h3 id="3-행렬-데이터의-결합"><a href="#3-행렬-데이터의-결합" class="headerlink" title="3. 행렬 데이터의 결합"></a>3. 행렬 데이터의 결합</h3><ul>
+<li>concatenate</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">na1 = np.random.randint(<span class="number">10</span>, size=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">na2 = np.random.randint(<span class="number">10</span>, size=(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line">na3 = np.random.randint(<span class="number">10</span>, size=(<span class="number">3</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 셀로 결합</span></span><br><span class="line">na1</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[9, 3, 0],
+       [3, 2, 6]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">na2</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[8, 1],
+       [8, 8],
+       [2, 9]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">na3</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[2, 0, 0],
+       [2, 7, 7],
+       [2, 3, 7]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.concatenate((na1, na3))</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[9, 3, 0],
+       [3, 2, 6],
+       [2, 0, 0],
+       [2, 7, 7],
+       [2, 3, 7]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.concatenate((na2, na3,), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[8, 1, 2, 0, 0],
+       [8, 8, 2, 7, 7],
+       [2, 9, 2, 3, 7]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># c_, r_</span></span><br><span class="line">np.c_[np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]), np.array([<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[1, 4],
+       [2, 5],
+       [3, 6]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.r_[np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]), np.array([<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([1, 2, 3, 4, 5, 6])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># split, bar, std, mean ...</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></div><div class="article-licensing box"><div class="licensing-title"><p><a href="https://sgm1021.github.io/2021/03/05/02_numpy_2/">https://sgm1021.github.io/2021/03/05/02_numpy_2/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KangWon Seo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-03-05</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-03-05</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2021/03/05/03_pandas_1/"><i class="level-item fas fa-chevron-left"></i><span class="level-item"> </span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/03/05/01_numpy/"><span class="level-item"> </span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/hodu.jpg" alt="KangWon Seo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">KangWon Seo</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Republic of Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">18</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">4</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/sgm1021"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/blog/"><span class="level-start"><span class="level-item">blog</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/book/"><span class="level-start"><span class="level-item">book</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/programming/"><span class="level-start"><span class="level-item">programming</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:21:44.000Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/%EC%A0%9C1%EA%B3%A0%EC%A7%80_%EB%AF%B8%EB%B6%84_%EC%9E%90%EB%8F%99%EA%B3%84%EC%82%B0/">제 1고지 미분 자동계산</a></p><p class="categories"><a href="/categories/book/">book</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.527Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/hello-world/">Hello World</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.525Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/05_pandas_3/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.523Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/04_pandas_2/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.522Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/03_pandas_1/"> </a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">March 2021</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">February 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AWS/"><span class="tag">AWS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/review/"><span class="tag">review</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo3.png" alt="KangWon`s blog" height="28"></a><p class="is-size-7"><span>&copy; 2021 KangWon Seo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Jupyter notebook - KangWon`s blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="KangWon`s blog"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="KangWon`s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="파이썬의 기본 문법 변수 선언, 식별자, 자료형, 형변환, 연산자 학습  1. 주석(comment)과 축력(print)123456789# 주석 : 앞에 #을 붙이면 코드로 실행이 안됩니다.# 코드에 대한 설명이나 중간에 코드를 샐행시키고 시퓨지 않을때 사용# 단축키 : ctrl(cmd) + &amp;#x2F;# 블럭설정 : shift + 방향키# 1,2,3을 출력하는 코드"><meta property="og:type" content="blog"><meta property="og:title" content="Jupyter notebook"><meta property="og:url" content="https://sgm1021.github.io/2021/02/22/02_basic_syntax/"><meta property="og:site_name" content="KangWon`s blog"><meta property="og:description" content="파이썬의 기본 문법 변수 선언, 식별자, 자료형, 형변환, 연산자 학습  1. 주석(comment)과 축력(print)123456789# 주석 : 앞에 #을 붙이면 코드로 실행이 안됩니다.# 코드에 대한 설명이나 중간에 코드를 샐행시키고 시퓨지 않을때 사용# 단축키 : ctrl(cmd) + &amp;#x2F;# 블럭설정 : shift + 방향키# 1,2,3을 출력하는 코드"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://sgm1021.github.io/img/og_image.png"><meta property="article:published_time" content="2021-02-22T08:32:13.000Z"><meta property="article:modified_time" content="2021-03-05T03:10:02.521Z"><meta property="article:author" content="KangWon Seo"><meta property="article:tag" content="python"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sgm1021.github.io/2021/02/22/02_basic_syntax/"},"headline":"KangWon`s blog","image":["https://sgm1021.github.io/img/og_image.png"],"datePublished":"2021-02-22T08:32:13.000Z","dateModified":"2021-03-05T03:10:02.521Z","author":{"@type":"Person","name":"KangWon Seo"},"description":"파이썬의 기본 문법 변수 선언, 식별자, 자료형, 형변환, 연산자 학습  1. 주석(comment)과 축력(print)123456789# 주석 : 앞에 #을 붙이면 코드로 실행이 안됩니다.# 코드에 대한 설명이나 중간에 코드를 샐행시키고 시퓨지 않을때 사용# 단축키 : ctrl(cmd) + &#x2F;# 블럭설정 : shift + 방향키# 1,2,3을 출력하는 코드"}</script><link rel="canonical" href="https://sgm1021.github.io/2021/02/22/02_basic_syntax/"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo3.png" alt="KangWon`s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" target="_blank" rel="noopener" href="https://about.me/kangwon">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-02-22T08:32:13.000Z" title="2021. 2. 22. 오후 5:32:13">2021-02-22</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-03-05T03:10:02.521Z" title="2021. 3. 5. 오후 12:10:02">2021-03-05</time></span><span class="level-item"><a class="link-muted" href="/categories/programming/">programming</a></span><span class="level-item">10 minutes read (About 1557 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Jupyter notebook</h1><div class="content"><h3 id="파이썬의-기본-문법"><a href="#파이썬의-기본-문법" class="headerlink" title="파이썬의 기본 문법"></a>파이썬의 기본 문법</h3><ul>
+<li>변수 선언, 식별자, 자료형, 형변환, 연산자 학습</li>
+</ul>
+<h4 id="1-주석-comment-과-축력-print"><a href="#1-주석-comment-과-축력-print" class="headerlink" title="1. 주석(comment)과 축력(print)"></a>1. 주석(comment)과 축력(print)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 주석 : 앞에 #을 붙이면 코드로 실행이 안됩니다.</span></span><br><span class="line"><span class="comment"># 코드에 대한 설명이나 중간에 코드를 샐행시키고 시퓨지 않을때 사용</span></span><br><span class="line"><span class="comment"># 단축키 : ctrl(cmd) + /</span></span><br><span class="line"><span class="comment"># 블럭설정 : shift + 방향키</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1,2,3을 출력하는 코드</span></span><br><span class="line">print(<span class="number">1</span>)</span><br><span class="line"><span class="comment">#print(2)</span></span><br><span class="line">print(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>1
+3
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 출력 : print 함수</span></span><br><span class="line"><span class="comment"># 코드 중간에 변수안에 들어있는 값을 확인하고 싶을때 사용</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="number">2</span></span><br><span class="line">print(b)</span><br><span class="line">c = <span class="number">3</span></span><br><span class="line">b = <span class="number">4</span></span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
+<pre><code>2
+4
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print 함수의 옵션</span></span><br><span class="line"><span class="comment"># docstring : 함수에 대한 설명 : 단축키(shift + tab)</span></span><br><span class="line"><span class="comment"># 자동완성 : tab</span></span><br><span class="line">print(<span class="number">1</span>,<span class="number">2</span>, sep=<span class="string">&quot;-&quot;</span>, end=<span class="string">&quot;\t&quot;</span>)</span><br><span class="line">print(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>1-2    3
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python_data_science = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python_data_science</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>1
+</code></pre>
+<h4 id="2-변수-선언"><a href="#2-변수-선언" class="headerlink" title="2. 변수 선언"></a>2. 변수 선언</h4><ul>
+<li>RAM 저장공간에 값을 할당하는 행위</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="number">2</span></span><br><span class="line">c = a + b</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d, e = <span class="number">3</span>, <span class="number">4</span></span><br><span class="line">f = g = <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-식별자"><a href="#3-식별자" class="headerlink" title="3. 식별자"></a>3. 식별자</h4><ul>
+<li>변수, 함수, 클래스, 모듈등의 이름을 식별자 라고 합니다.</li>
+<li>식별자 규칙 <ul>
+<li>소문자, 대문자, 숫자, 언더스코어(_)를 사용합니다.</li>
+<li>가장 압에 숫자 사용 불가</li>
+<li>예약어의 사용 불가 : def, class, try, except …</li>
+<li>컨벤션<ul>
+<li>snake case : fast_campus : 변수, 함수<br>_ camel case : FastCampus, fastCampus : 클래스</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-데이터-다입"><a href="#4-데이터-다입" class="headerlink" title="4. 데이터 다입"></a>4. 데이터 다입</h4><ul>
+<li>RAM 저장공간을 효율적으로 사용하기 위해 저장공간의 타입을 설정</li>
+<li>동적타이핑<ul>
+<li>변수 선언시 저장되는 값에 따라서 자동으로 데이터 타입이 설정</li>
+</ul>
+</li>
+<li>기본 데이터 타입 : int, float, bool, str</li>
+<li>컬렉션 데이터 타입 : list, tuple, dict</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1</span></span><br><span class="line"><span class="comment"># int a = 1 </span></span><br><span class="line">b = <span class="string">&quot;python&quot;</span></span><br><span class="line"><span class="built_in">type</span>(a), <span class="built_in">type</span>(b)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(int, str)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 기본 데이터 타입 : int, float, bool, str</span></span><br><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="number">1.2</span></span><br><span class="line">c = <span class="literal">True</span></span><br><span class="line">d = <span class="string">&quot;data&quot;</span></span><br><span class="line"><span class="built_in">type</span>(a),<span class="built_in">type</span>(b),<span class="built_in">type</span>(c),<span class="built_in">type</span>(d)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(int, float, bool, str)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a + b</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>2.2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a + d</span><br></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-22-4fbab87c839c&gt; in &lt;module&gt;
+----&gt; 1 a + d
+
+
+TypeError: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터 타입에 함수 : 문자열</span></span><br><span class="line"><span class="comment"># upper : 대문자로 변환</span></span><br><span class="line">e = d.upper()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d, e</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(&#39;data&#39;, &#39;DATA&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="string">&quot;Fast Campus&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># lower : 소문자로 변환</span></span><br><span class="line">f.lower()</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;fast campus&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># strip : 공백제거</span></span><br><span class="line">f.strip()</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;Fast Campus&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># replace : 특정 문자열 치환</span></span><br><span class="line">f.replace(<span class="string">&quot;Fast&quot;</span>, <span class="string">&quot;Slow&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;Slow Campus&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.replace(<span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;FastCampus&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dir</span>(f)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>[&#39;__add__&#39;,
+ &#39;__class__&#39;,
+ &#39;__contains__&#39;,
+ &#39;__delattr__&#39;,
+ &#39;__dir__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__eq__&#39;,
+ &#39;__format__&#39;,
+ &#39;__ge__&#39;,
+ &#39;__getattribute__&#39;,
+ &#39;__getitem__&#39;,
+ &#39;__getnewargs__&#39;,
+ &#39;__gt__&#39;,
+ &#39;__hash__&#39;,
+ &#39;__init__&#39;,
+ &#39;__init_subclass__&#39;,
+ &#39;__iter__&#39;,
+ &#39;__le__&#39;,
+ &#39;__len__&#39;,
+ &#39;__lt__&#39;,
+ &#39;__mod__&#39;,
+ &#39;__mul__&#39;,
+ &#39;__ne__&#39;,
+ &#39;__new__&#39;,
+ &#39;__reduce__&#39;,
+ &#39;__reduce_ex__&#39;,
+ &#39;__repr__&#39;,
+ &#39;__rmod__&#39;,
+ &#39;__rmul__&#39;,
+ &#39;__setattr__&#39;,
+ &#39;__sizeof__&#39;,
+ &#39;__str__&#39;,
+ &#39;__subclasshook__&#39;,
+ &#39;capitalize&#39;,
+ &#39;casefold&#39;,
+ &#39;center&#39;,
+ &#39;count&#39;,
+ &#39;encode&#39;,
+ &#39;endswith&#39;,
+ &#39;expandtabs&#39;,
+ &#39;find&#39;,
+ &#39;format&#39;,
+ &#39;format_map&#39;,
+ &#39;index&#39;,
+ &#39;isalnum&#39;,
+ &#39;isalpha&#39;,
+ &#39;isascii&#39;,
+ &#39;isdecimal&#39;,
+ &#39;isdigit&#39;,
+ &#39;isidentifier&#39;,
+ &#39;islower&#39;,
+ &#39;isnumeric&#39;,
+ &#39;isprintable&#39;,
+ &#39;isspace&#39;,
+ &#39;istitle&#39;,
+ &#39;isupper&#39;,
+ &#39;join&#39;,
+ &#39;ljust&#39;,
+ &#39;lower&#39;,
+ &#39;lstrip&#39;,
+ &#39;maketrans&#39;,
+ &#39;partition&#39;,
+ &#39;replace&#39;,
+ &#39;rfind&#39;,
+ &#39;rindex&#39;,
+ &#39;rjust&#39;,
+ &#39;rpartition&#39;,
+ &#39;rsplit&#39;,
+ &#39;rstrip&#39;,
+ &#39;split&#39;,
+ &#39;splitlines&#39;,
+ &#39;startswith&#39;,
+ &#39;strip&#39;,
+ &#39;swapcase&#39;,
+ &#39;title&#39;,
+ &#39;translate&#39;,
+ &#39;upper&#39;,
+ &#39;zfill&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 오프셋 인덱스 : 마스크, 마스킹 : []</span></span><br><span class="line"><span class="comment"># 문자열은 순서가 있는 문자들의 집합</span></span><br><span class="line">g = <span class="string">&quot;abcdefg&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g[<span class="number">2</span>], g[-<span class="number">2</span>], g[<span class="number">2</span>:<span class="number">5</span>], g[:<span class="number">2</span>], g[<span class="number">3</span>:], g[-<span class="number">2</span>:], g[::<span class="number">2</span>], g[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(&#39;c&#39;, &#39;f&#39;, &#39;cde&#39;, &#39;ab&#39;, &#39;defg&#39;, &#39;fg&#39;, &#39;aceg&#39;, &#39;gfedcba&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numbers = <span class="string">&quot;123456789&quot;</span> <span class="comment"># 97531 출력</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = numbers[::<span class="number">2</span>]</span><br><span class="line">result[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;97531&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numbers[::<span class="number">2</span>][::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;97531&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numbers[::-<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;97531&#39;
+</code></pre>
+<h4 id="컬렉션-데이터-타입-list-tuple-dict"><a href="#컬렉션-데이터-타입-list-tuple-dict" class="headerlink" title="컬렉션 데이터 타입 : list, tuple, dict"></a>컬렉션 데이터 타입 : list, tuple, dict</h4><ul>
+<li>list [] : 순서가 있는 수정이 가능한 데이터 타입</li>
+<li>tuple () : 순서가 있는 수정이 불가능한 데이터 타입</li>
+<li>dict {}: 순서가 없고 키:값 으로 구성된 데이터 타입</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list</span></span><br><span class="line">ls = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&quot;four&quot;</span>, [<span class="number">5</span>,<span class="number">6</span>], <span class="literal">True</span>, <span class="number">1.2</span>]</span><br><span class="line"><span class="built_in">type</span>(ls), ls</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(list, [1, 2, 3, &#39;four&#39;, [5, 6], True, 1.2])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># offset index 사용 가능</span></span><br><span class="line">ls[<span class="number">3</span>], ls[<span class="number">1</span>:<span class="number">3</span>], ls[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(&#39;four&#39;, [2, 3], [1.2, True, [5, 6], &#39;four&#39;, 3, 2, 1])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list 함수</span></span><br><span class="line">ls = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># append : 가장 뒤에 값을 추가</span></span><br><span class="line">ls.append(<span class="number">3</span>)</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>[1, 5, 2, 4, 3]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sort : 오름차순으로 정렬</span></span><br><span class="line">ls.sort()</span><br><span class="line">ls[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>[5, 4, 3, 2, 1]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pop : 가장 마지막 데이터를 출력하고 출력한 데이터를 삭제</span></span><br><span class="line"><span class="comment"># ctrl + enter : 현재 셀을 계속 실행</span></span><br><span class="line">num = ls.pop()</span><br><span class="line">num, ls</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(3, [1, 2])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 리스트의 복사</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ls1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">ls2 = ls1 <span class="comment"># 얕은 복사 : 주소값 복사</span></span><br><span class="line">ls1, ls2</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>([1, 2, 3], [1, 2, 3])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls1[<span class="number">2</span>] = <span class="number">5</span></span><br><span class="line">ls1, ls2</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>([1, 2, 5], [1, 2, 5])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls3 = ls1.copy()</span><br><span class="line">ls1, ls3</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>([1, 2, 5], [1, 2, 5])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls1[<span class="number">2</span>] = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls1, ls3</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>([1, 2, 10], [1, 2, 5])
+</code></pre>
+<h4 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h4><ul>
+<li>리스트와 같지만 수정이 불가능한 데이터 타입</li>
+<li>튜플은 리스트보다 같은 데이터를 가졌을때 공간을 적게 사용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tp1 = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></span><br><span class="line">tp2 = (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line"><span class="built_in">type</span>(tp1), <span class="built_in">type</span>(tp2), tp1, tp2</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(tuple, tuple, (1, 2, 3), (4, 5, 6))
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a, b = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">a, b</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(1, 2)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># offset index 사용 가능</span></span><br><span class="line">tp1[<span class="number">1</span>], tp1[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(2, (3, 2, 1))
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 리스트와 튜플의 저장공간 차이 비교</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">ls = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">tp = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">print(sys.getsizeof(ls), sys.getsizeof(tp))</span><br></pre></td></tr></table></figure>
+<pre><code>80 64
+</code></pre>
+<h4 id="dict"><a href="#dict" class="headerlink" title="dict {}"></a>dict {}</h4><ul>
+<li>순서가 없고 {키:값}으로 구성된 데이터 타입</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 선언 : 키는 정수, 문자열 데이터 타입만 사용 가능</span></span><br><span class="line"><span class="comment"># 인덱스 대신 키를 사용</span></span><br><span class="line">dic = &#123;</span><br><span class="line">    <span class="number">1</span>: <span class="string">&quot;one&quot;</span>,</span><br><span class="line">    <span class="string">&quot;two&quot;</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">&quot;three&quot;</span> : [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">type</span>(dic), dic</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(dict, &#123;1: &#39;one&#39;, &#39;two&#39;: 2, &#39;three&#39;: [1, 2, 3]&#125;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dic[<span class="number">1</span>], dic[<span class="string">&quot;three&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(&#39;one&#39;, [1, 2, 3])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dic[<span class="string">&quot;two&quot;</span>] = <span class="number">123</span></span><br><span class="line">dic</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#123;1: &#39;one&#39;, &#39;two&#39;: 123, &#39;three&#39;: [1, 2, 3]&#125;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 아래의 데이터를 list와 dict로 선언</span></span><br><span class="line"><span class="comment"># 도시 : seoul, busan, daegu</span></span><br><span class="line"><span class="comment"># 인구 : 9,700,000, 3,400,00, 2,400,000</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 리스트</span></span><br><span class="line">city = [<span class="string">&quot;seoul&quot;</span>, <span class="string">&quot;busan&quot;</span>, <span class="string">&quot;daegu&quot;</span>]</span><br><span class="line">population = [<span class="number">9700000</span>, <span class="number">3400000</span>, <span class="number">2400000</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 딕셔너리</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;seoul&quot;</span> : <span class="number">9700000</span>,</span><br><span class="line">    <span class="string">&quot;busan&quot;</span> : <span class="number">3400000</span>,</span><br><span class="line">    <span class="string">&quot;daegu&quot;</span> : <span class="number">2400000</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sum</span>(population)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>15500000
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sum</span>(data.values())</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>15500000
+</code></pre>
+<h3 id="5-형변환"><a href="#5-형변환" class="headerlink" title="5. 형변환"></a>5. 형변환</h3><ul>
+<li>데이터 타입을 변환하는 방법</li>
+<li>int, float, bool, str, list, tuple, dict</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="string">&quot;2&quot;</span></span><br><span class="line">a + <span class="built_in">int</span>(b)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>3
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>(a) + b</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;12&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>(data.values())</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>[9700000, 3400000, 2400000]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">city, population</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>([&#39;seoul&#39;, &#39;busan&#39;, &#39;daegu&#39;], [9700000, 3400000, 2400000])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># zip : 같은 인덱스 데이터끼리 묶어주는 함수</span></span><br><span class="line"><span class="built_in">list</span>(<span class="built_in">zip</span>(city, population))</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>[(&#39;seoul&#39;, 9700000), (&#39;busan&#39;, 3400000), (&#39;daegu&#39;, 2400000)]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="built_in">dict</span>(<span class="built_in">zip</span>(city, population))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data1 = <span class="built_in">list</span>(result.keys())</span><br><span class="line">data2 = <span class="built_in">list</span>(result.values())</span><br><span class="line">data1, data2</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>([&#39;seoul&#39;, &#39;busan&#39;, &#39;daegu&#39;], [9700000, 3400000, 2400000])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&quot;python&quot;</span></span><br><span class="line"><span class="built_in">int</span>(string)</span><br></pre></td></tr></table></figure>
+
+<pre><code>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-113-3eb1982ee741&gt; in &lt;module&gt;
+      1 string = &quot;python&quot;
+----&gt; 2 int(string)
+
+
+ValueError: invalid literal for int() with base 10: &#39;python&#39;
+</code></pre>
+<h3 id="6-연산자"><a href="#6-연산자" class="headerlink" title="6. 연산자"></a>6. 연산자</h3><ul>
+<li>산술연산자 : +, -, *, /, //, %, **</li>
+<li>할당연산자 : 변수에 누적시켜서 연산 : +=, //=, **=</li>
+<li>비교연산자 : &lt;, &gt;, ==, !=, &lt;=, &gt;= : 결과로 True, False</li>
+<li>멤버연산자 : 특정 데이터가 있는지 확인할때 사용 : not in, in</li>
+<li>논리연산자 : True, False를 연산 : or, and, not</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 산술연산</span></span><br><span class="line"><span class="number">1</span> + <span class="number">4</span> / <span class="number">2</span> ** <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>2.0
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 할당연산</span></span><br><span class="line">a = <span class="number">10</span></span><br><span class="line">a+=<span class="number">10</span></span><br><span class="line">a+=<span class="number">10</span></span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>30
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 비교연산</span></span><br><span class="line">b=<span class="number">2</span></span><br><span class="line">print(a, b)</span><br><span class="line">a &lt; b, a == b, a !=b</span><br></pre></td></tr></table></figure>
+<pre><code>30 2
+
+
+
+
+
+(False, False, True)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 논리연산</span></span><br><span class="line"><span class="literal">True</span> <span class="keyword">and</span> <span class="literal">False</span>, <span class="literal">True</span> <span class="keyword">or</span> <span class="literal">False</span>, <span class="keyword">not</span> <span class="literal">True</span> <span class="keyword">or</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(False, True, False)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 멤버연산</span></span><br><span class="line">ls = [<span class="string">&#x27;jin&#x27;</span>, <span class="string">&#x27;andy&#x27;</span>, <span class="string">&#x27;john&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;andy&#x27;</span> <span class="keyword">in</span> ls, <span class="string">&#x27;anchel&#x27;</span> <span class="keyword">in</span> ls</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(True, False)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 랜덤함수</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">random.randint(<span class="number">1</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>10
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 입력함수</span></span><br><span class="line">data = <span class="built_in">input</span>(<span class="string">&quot;insert string: &quot;</span>)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+<pre><code>insert string: 안녕하세요
+
+
+
+
+
+&#39;안녕하세요&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 해결의 책 : 질문을 하면 질문에 대한 답변을 해주는 책</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 솔루션을 리스트로 작성</span></span><br><span class="line"><span class="comment"># 질문 입력 받음</span></span><br><span class="line"><span class="comment"># 솔루션의 갯수에 맞게 랜덤한 index 정수 값을 생성</span></span><br><span class="line"><span class="comment"># index 해당하는 솔루션 리스트의 데이터를 출력</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 솔루션을 리스트로 작성</span></span><br><span class="line">solutions = [</span><br><span class="line">    <span class="string">&quot;무엇을 하든 잘 안될것이다.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;생각지도 않게 좋은 일이 생길것이다.&quot;</span>,</span><br><span class="line">    <span class="string">&quot;무엇을 상상하든 그 이상이다.&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 질문 입력 받음</span></span><br><span class="line"><span class="built_in">input</span>(<span class="string">&quot;질문을 입력하세요.: &quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 솔루션의 갯수에 맞게 랜덤한 index 정수 값을 생성</span></span><br><span class="line">idx = random.randint(<span class="number">0</span>, <span class="built_in">len</span>(solutions) - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># index 해당하는 솔루션 리스트의 데이터를 출력</span></span><br><span class="line">solutions[idx]</span><br></pre></td></tr></table></figure>
+<pre><code>질문을 입력하세요.: d
+
+
+
+
+
+&#39;무엇을 하든 잘 안될것이다.&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></div><div class="article-licensing box"><div class="licensing-title"><p>Jupyter notebook</p><p><a href="https://sgm1021.github.io/2021/02/22/02_basic_syntax/">https://sgm1021.github.io/2021/02/22/02_basic_syntax/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KangWon Seo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-02-22</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-03-05</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/python/">python</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2021/02/22/01_server_setting/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">AWS server setting</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/02/22/03_condition_loop/"><span class="level-item">Jupyter notebook</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/hodu.jpg" alt="KangWon Seo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">KangWon Seo</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Republic of Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">18</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">4</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/sgm1021"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/blog/"><span class="level-start"><span class="level-item">blog</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/book/"><span class="level-start"><span class="level-item">book</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/programming/"><span class="level-start"><span class="level-item">programming</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:21:44.000Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/%EC%A0%9C1%EA%B3%A0%EC%A7%80_%EB%AF%B8%EB%B6%84_%EC%9E%90%EB%8F%99%EA%B3%84%EC%82%B0/">제 1고지 미분 자동계산</a></p><p class="categories"><a href="/categories/book/">book</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.527Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/hello-world/">Hello World</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.525Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/05_pandas_3/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.523Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/04_pandas_2/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.522Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/03_pandas_1/"> </a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">March 2021</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">February 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AWS/"><span class="tag">AWS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/review/"><span class="tag">review</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo3.png" alt="KangWon`s blog" height="28"></a><p class="is-size-7"><span>&copy; 2021 KangWon Seo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

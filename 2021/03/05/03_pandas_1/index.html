@@ -1,0 +1,1820 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>KangWon`s blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="KangWon`s blog"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="KangWon`s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Pandas 데이터 분석을 위한 사용이 쉽고 성능이 좋은 오픈소스 python 라이브러리 R과 Pandas의 특징 R보다 Pandas가 학습이 쉽습니다. R보다 Pandas가 성능이 좋습니다. R보다 Python은 활용할 수 있는 분야가 많습니다.   크게 두가지 데이터 타입을 사용합니다. Serise : index와 value로 이루어진 데이터 타입 Da"><meta property="og:type" content="blog"><meta property="og:title" content="KangWon`s blog"><meta property="og:url" content="https://sgm1021.github.io/2021/03/05/03_pandas_1/"><meta property="og:site_name" content="KangWon`s blog"><meta property="og:description" content="Pandas 데이터 분석을 위한 사용이 쉽고 성능이 좋은 오픈소스 python 라이브러리 R과 Pandas의 특징 R보다 Pandas가 학습이 쉽습니다. R보다 Pandas가 성능이 좋습니다. R보다 Python은 활용할 수 있는 분야가 많습니다.   크게 두가지 데이터 타입을 사용합니다. Serise : index와 value로 이루어진 데이터 타입 Da"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://sgm1021.github.io/img/og_image.png"><meta property="article:published_time" content="2021-03-05T03:10:02.522Z"><meta property="article:modified_time" content="2021-03-05T03:10:02.522Z"><meta property="article:author" content="KangWon Seo"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://sgm1021.github.io/2021/03/05/03_pandas_1/"},"headline":"KangWon`s blog","image":["https://sgm1021.github.io/img/og_image.png"],"datePublished":"2021-03-05T03:10:02.522Z","dateModified":"2021-03-05T03:10:02.522Z","author":{"@type":"Person","name":"KangWon Seo"},"description":"Pandas 데이터 분석을 위한 사용이 쉽고 성능이 좋은 오픈소스 python 라이브러리 R과 Pandas의 특징 R보다 Pandas가 학습이 쉽습니다. R보다 Pandas가 성능이 좋습니다. R보다 Python은 활용할 수 있는 분야가 많습니다.   크게 두가지 데이터 타입을 사용합니다. Serise : index와 value로 이루어진 데이터 타입 Da"}</script><link rel="canonical" href="https://sgm1021.github.io/2021/03/05/03_pandas_1/"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo3.png" alt="KangWon`s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" target="_blank" rel="noopener" href="https://about.me/kangwon">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-03-05T03:10:02.522Z" title="2021. 3. 5. 오후 12:10:02">2021-03-05</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-03-05T03:10:02.522Z" title="2021. 3. 5. 오후 12:10:02">2021-03-05</time></span><span class="level-item">12 minutes read (About 1860 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"> </h1><div class="content"><h3 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h3><ul>
+<li>데이터 분석을 위한 사용이 쉽고 성능이 좋은 오픈소스 python 라이브러리</li>
+<li>R과 Pandas의 특징<ul>
+<li>R보다 Pandas가 학습이 쉽습니다.</li>
+<li>R보다 Pandas가 성능이 좋습니다.</li>
+<li>R보다 Python은 활용할 수 있는 분야가 많습니다.</li>
+</ul>
+</li>
+<li>크게 두가지 데이터 타입을 사용합니다.<ul>
+<li>Serise : index와 value로 이루어진 데이터 타입</li>
+<li>DataFrame : index, column, value로 이루어진 데이터 타입</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+<h3 id="1-Series"><a href="#1-Series" class="headerlink" title="1. Series"></a>1. Series</h3><ul>
+<li>동일한 데이터 타입의 값을 갖습니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Series : value 만 설정하면 index는 0부처 자동으로 설정됩니다.</span></span><br><span class="line">data = pd.Series(np.random.randint(<span class="number">10</span>, size=<span class="number">5</span>))</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>0    3
+1    4
+2    5
+3    0
+4    3
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index 설정</span></span><br><span class="line">data = pd.Series(np.random.randint(<span class="number">10</span>, size=<span class="number">5</span>), index=<span class="built_in">list</span>(<span class="string">&#x27;ABCDE&#x27;</span>))</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>A    0
+B    7
+C    1
+D    8
+E    2
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.index, data.values</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(Index([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;], dtype=&#39;object&#39;), array([0, 7, 1, 8, 2]))
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&quot;B&quot;</span>], data.B</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>(7, 7)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&quot;C&quot;</span>] = <span class="number">10</span></span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>A     0
+B     7
+C    10
+D     8
+E     2
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 브로드 캐스팅</span></span><br><span class="line">data * <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>A      0
+B     70
+C    100
+D     80
+E     20
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[[<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>]]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>B     7
+C    10
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># offset index</span></span><br><span class="line">data[<span class="number">2</span>::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>C    10
+E     2
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>E     2
+D     8
+C    10
+B     7
+A     0
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Series 연산</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>A     0
+B     7
+C    10
+D     8
+E     2
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data2 = pd.Series(&#123;<span class="string">&quot;D&quot;</span>:<span class="number">3</span>, <span class="string">&quot;E&quot;</span>:<span class="number">5</span>, <span class="string">&quot;F&quot;</span>:<span class="number">7</span>&#125;)</span><br><span class="line">data2</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>D    3
+E    5
+F    7
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = data + data2</span><br><span class="line">result <span class="comment"># None</span></span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>A     NaN
+B     NaN
+C     NaN
+D    11.0
+E     7.0
+F     NaN
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result.isnull()</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>A     True
+B     True
+C     True
+D    False
+E    False
+F     True
+dtype: bool
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result[result.isnull()] = data</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>A     0.0
+B     7.0
+C    10.0
+D    11.0
+E     7.0
+F     NaN
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result[result.isnull()] = data2</span><br><span class="line">result</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>A     0.0
+B     7.0
+C    10.0
+D    11.0
+E     7.0
+F     7.0
+dtype: float64
+</code></pre>
+<h3 id="2-DataFrame"><a href="#2-DataFrame" class="headerlink" title="2. DataFrame"></a>2. DataFrame</h3><ul>
+<li>데이터 프레임은 여러개의 Series로 구성</li>
+<li>같은 컬럼에 있는 value값은 같은 데이터 타입을 갖습니다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터 프레임 생성 1 : 딕셔너리의 리스트</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">datas = &#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>:[<span class="string">&quot;dss&quot;</span>, <span class="string">&quot;fcamp&quot;</span>],</span><br><span class="line">    <span class="string">&quot;Email&quot;</span>:[<span class="string">&quot;dss@gmail.com&quot;</span>,<span class="string">&quot;fcamp@daum.net&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">datas</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#123;&#39;name&#39;: [&#39;dss&#39;, &#39;fcamp&#39;], &#39;Email&#39;: [&#39;dss@gmail.com&#39;, &#39;fcamp@daum.net&#39;]&#125;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(datas)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터 프레임 생성 2 : 리스트의 딕셔너리</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">datas = [</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;dss&quot;</span>, <span class="string">&quot;email&quot;</span>:<span class="string">&quot;dss@gmail.com&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;fcamp&quot;</span>, <span class="string">&quot;email&quot;</span>:<span class="string">&quot;fcamp@daum.net&quot;</span>&#125;,</span><br><span class="line">]</span><br><span class="line">datas</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>[&#123;&#39;name&#39;: &#39;dss&#39;, &#39;email&#39;: &#39;dss@gmail.com&#39;&#125;,
+ &#123;&#39;name&#39;: &#39;fcamp&#39;, &#39;email&#39;: &#39;fcamp@daum.net&#39;&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(datas)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 인덱스를 추가하는 방법</span></span><br><span class="line">df = pd.DataFrame(datas, index = [<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>])</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>one</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.index</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>Index([&#39;one&#39;, &#39;two&#39;], dtype=&#39;object&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.columns</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>Index([&#39;name&#39;, &#39;email&#39;], dtype=&#39;object&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.values</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>array([[&#39;dss&#39;, &#39;dss@gmail.com&#39;],
+       [&#39;fcamp&#39;, &#39;fcamp@daum.net&#39;]], dtype=object)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터 프레임에서 데이터의 선택 : row, column, (row, column)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># row 선택 : loc</span></span><br><span class="line">df = pd.DataFrame(datas)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.loc[<span class="number">1</span>][<span class="string">&quot;email&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;fcamp@daum.net&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index가 있으면 수정, 없으면 추가</span></span><br><span class="line">df.loc[<span class="number">2</span>] = &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;andy&quot;</span>, <span class="string">&quot;email&quot;</span>:<span class="string">&quot;andy@naver.com&quot;</span>&#125;</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>andy</td>
+      <td>andy@naver.com</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># column 선택</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;name&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>0      dss
+1    fcamp
+2     andy
+Name: name, dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;id&quot;</span>] = <span class="string">&quot;&quot;</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>andy</td>
+      <td>andy@naver.com</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;id&quot;</span>] = <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>) <span class="comment"># np.arange(1, 4)</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>andy</td>
+      <td>andy@naver.com</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.dtypes</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>name     object
+email    object
+id        int32
+dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># row, column 선택</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.loc[[<span class="number">0</span>,<span class="number">2</span>], [<span class="string">&quot;email&quot;</span>, <span class="string">&quot;id&quot;</span>]]</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>email</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss@gmail.com</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>andy@naver.com</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 컬럼 데이터 순서 설정</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[[<span class="string">&quot;id&quot;</span>, <span class="string">&quot;name&quot;</span>, <span class="string">&quot;email&quot;</span>]]</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>andy</td>
+      <td>andy@naver.com</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># head, tail</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.tail(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>andy</td>
+      <td>andy@naver.com</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="3-apply-함수"><a href="#3-apply-함수" class="headerlink" title="3. apply 함수"></a>3. apply 함수</h3><ul>
+<li>map 함수와 비슷</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># email 컬럽에서 메일의 도메인만 가져와서 새로운 domain컬럼을 생성</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>andy</td>
+      <td>andy@naver.com</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">domain</span>(<span class="params">email</span>):</span></span><br><span class="line">    <span class="keyword">return</span> email.split(<span class="string">&quot;@&quot;</span>)[<span class="number">1</span>].split(<span class="string">&quot;.&quot;</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">domain(df.loc[<span class="number">0</span>][<span class="string">&quot;email&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;gmail&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;domain&quot;</span>] = df[<span class="string">&quot;email&quot;</span>].apply(domain)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+      <th>id</th>
+      <th>domain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+      <td>1</td>
+      <td>gmail</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+      <td>2</td>
+      <td>daum</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>andy</td>
+      <td>andy@naver.com</td>
+      <td>3</td>
+      <td>naver</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;domain&quot;</span>] = df[<span class="string">&quot;email&quot;</span>].apply(<span class="keyword">lambda</span> email:email.split(<span class="string">&quot;@&quot;</span>)[<span class="number">1</span>].split(<span class="string">&quot;.&quot;</span>)[<span class="number">0</span>])</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>email</th>
+      <th>id</th>
+      <th>domain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dss</td>
+      <td>dss@gmail.com</td>
+      <td>1</td>
+      <td>gmail</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fcamp</td>
+      <td>fcamp@daum.net</td>
+      <td>2</td>
+      <td>daum</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>andy</td>
+      <td>andy@naver.com</td>
+      <td>3</td>
+      <td>naver</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> makedata <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_name()</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&#39;Alvin&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_age()</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>30
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df1= pd.DataFrame(make_data(<span class="number">5</span>))</span><br><span class="line">df2= pd.DataFrame(make_data(<span class="number">5</span>))</span><br><span class="line">df2</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>40</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>32</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>35</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>22</td>
+      <td>Andrew</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>27</td>
+      <td>Andrew</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="4-append"><a href="#4-append" class="headerlink" title="4. append"></a>4. append</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># append 데이터 프레임 합치기</span></span><br><span class="line">df3 = df1.append(df2)</span><br><span class="line">df3[<span class="number">2</span>:<span class="number">7</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>34</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>29</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>40</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>32</td>
+      <td>Anchal</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reset_index 인덱스 재정렬</span></span><br><span class="line">df3.reset_index(drop=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21</td>
+      <td>Alan</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27</td>
+      <td>Alan</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>34</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>29</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>40</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>32</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>35</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>22</td>
+      <td>Andrew</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>27</td>
+      <td>Andrew</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df3 = df1.append(df2, ignore_index=<span class="literal">True</span>)</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21</td>
+      <td>Alan</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27</td>
+      <td>Alan</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>34</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>29</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>40</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>32</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>35</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>22</td>
+      <td>Andrew</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>27</td>
+      <td>Andrew</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="5-concat"><a href="#5-concat" class="headerlink" title="5. concat"></a>5. concat</h3><ul>
+<li>row나 column으로 데이터 프레임을 합칠때 사용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df3 = pd.concat([df1, df2]).reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21</td>
+      <td>Alan</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27</td>
+      <td>Alan</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>34</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>29</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>40</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>32</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>35</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>22</td>
+      <td>Andrew</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>27</td>
+      <td>Andrew</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([df3, df1], axis=<span class="number">1</span>, join=<span class="string">&quot;inner&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21</td>
+      <td>Alan</td>
+      <td>21</td>
+      <td>Alan</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27</td>
+      <td>Alan</td>
+      <td>27</td>
+      <td>Alan</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>34</td>
+      <td>Alvin</td>
+      <td>34</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>29</td>
+      <td>Billy</td>
+      <td>29</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25</td>
+      <td>Anchal</td>
+      <td>25</td>
+      <td>Anchal</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h3><ul>
+<li>특정 컬럽의 중복되는 데이터를 합쳐서 새로운 데이터 프레임을 만드는 방법</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(make_data())</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>35</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>26</td>
+      <td>Arnold</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>26</td>
+      <td>Jin</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23</td>
+      <td>Anchal</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30</td>
+      <td>Adam</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>21</td>
+      <td>Arnold</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>33</td>
+      <td>Adam</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>21</td>
+      <td>Adam</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>24</td>
+      <td>Alvin</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>32</td>
+      <td>Andrew</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># size</span></span><br><span class="line">result_df = df.groupby(<span class="string">&quot;Name&quot;</span>).size().reset_index(name=<span class="string">&quot;count&quot;</span>)</span><br><span class="line">result_df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Adam</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Alvin</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Anchal</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Andrew</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Arnold</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Jin</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sort_values : 설정한 컬럼으로 데이터 프레임을 정렬</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result_df.sort_values([<span class="string">&quot;count&quot;</span>], ascending = <span class="literal">False</span>, inplace = <span class="literal">True</span>)</span><br><span class="line">result_df.reset_index(drop=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">result_df</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Adam</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Alvin</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Arnold</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Anchal</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Andrew</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Jin</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># agg</span></span><br><span class="line"><span class="comment"># size(), min(), max(), mean()</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby(<span class="string">&quot;Name&quot;</span>).agg(<span class="string">&quot;min&quot;</span>).reset_index()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Adam</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Alvin</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Anchal</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Andrew</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Arnold</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Jin</td>
+      <td>26</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터를 요약해서 보여주는 함수</span></span><br><span class="line">df.describe()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>27.100000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>5.087021</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>21.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>23.250000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>26.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>31.500000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>35.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="7-Merge-sql-join"><a href="#7-Merge-sql-join" class="headerlink" title="7. Merge = sql(join)"></a>7. Merge = sql(join)</h3><ul>
+<li>두개 이상의 데이터 프레임을 합쳐서 결과를 출력하는 방법</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></div><div class="article-licensing box"><div class="licensing-title"><p><a href="https://sgm1021.github.io/2021/03/05/03_pandas_1/">https://sgm1021.github.io/2021/03/05/03_pandas_1/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KangWon Seo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2021-03-05</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-03-05</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>Afdian.net</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="/" alt="Alipay"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>Buy me a coffee</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="/" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2021/03/05/04_pandas_2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item"> </span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/03/05/02_numpy_2/"><span class="level-item"> </span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/hodu.jpg" alt="KangWon Seo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">KangWon Seo</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Republic of Korea</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">18</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">4</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/sgm1021"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/blog/"><span class="level-start"><span class="level-item">blog</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/book/"><span class="level-start"><span class="level-item">book</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/programming/"><span class="level-start"><span class="level-item">programming</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:21:44.000Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/%EC%A0%9C1%EA%B3%A0%EC%A7%80_%EB%AF%B8%EB%B6%84_%EC%9E%90%EB%8F%99%EA%B3%84%EC%82%B0/">제 1고지 미분 자동계산</a></p><p class="categories"><a href="/categories/book/">book</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.527Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/hello-world/">Hello World</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.525Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/05_pandas_3/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.523Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/04_pandas_2/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-05T03:10:02.522Z">2021-03-05</time></p><p class="title"><a href="/2021/03/05/03_pandas_1/"> </a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">March 2021</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/02/"><span class="level-start"><span class="level-item">February 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AWS/"><span class="tag">AWS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/review/"><span class="tag">review</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo3.png" alt="KangWon`s blog" height="28"></a><p class="is-size-7"><span>&copy; 2021 KangWon Seo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
